@@ -60,6 +60,8 @@ with st.sidebar:
 
 # ---------------- MAIN ----------------
 st.title("📥 Painel de Download")
+DOWNLOAD_DIR = "downloads"
+os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 
 if download_btn:
     if not video_link or not video_link.startswith("http"):
@@ -109,3 +111,4 @@ if download_btn:
 
 else:
     st.info("⬅️ Use a barra lateral para inserir um link.")
+
