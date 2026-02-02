@@ -1,6 +1,6 @@
 import streamlit as st
 import os
-import subprocess
+from yt_dlp import YoutubeDL
 
 # ---------------- CONFIG ----------------
 st.set_page_config(
@@ -88,7 +88,15 @@ if download_btn:
                 video_link
             ]
 
-            subprocess.run(command, check=True)
+            ydl_opts = {
+                "format": format_opt,
+                "outtmpl": output_path,
+                "merge_output_format": "mp4",
+                "quiet": True,
+            }
+            
+            with YoutubeDL(ydl_opts) as ydl:
+                ydl.download([video_link])
 
             status.write("✅ Download concluído!")
             status.update(label="Pronto para baixar 🎉", state="complete")
@@ -111,4 +119,5 @@ if download_btn:
 
 else:
     st.info("⬅️ Use a barra lateral para inserir um link.")
+
 
