@@ -60,8 +60,6 @@ with st.sidebar:
 
 # ---------------- MAIN ----------------
 st.title("📥 Painel de Download")
-DOWNLOAD_DIR = "downloads"
-os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 
 if download_btn:
     if not video_link or not video_link.startswith("http"):
@@ -77,24 +75,16 @@ if download_btn:
             format_opt = "best[ext=mp4][height<=480]"
         else:
             format_opt = "best[ext=mp4]"
-            
+
         try:
             status.write("📡 Baixando vídeo...")
-            command = [
-                "yt-dlp",
-                "-f", format_opt,
-                "--merge-output-format", "mp4",
-                "-o", output_path,
-                video_link
-            ]
 
             ydl_opts = {
                 "format": format_opt,
                 "outtmpl": output_path,
-                "merge_output_format": "mp4",
                 "quiet": True,
             }
-            
+
             with YoutubeDL(ydl_opts) as ydl:
                 ydl.download([video_link])
 
@@ -119,6 +109,3 @@ if download_btn:
 
 else:
     st.info("⬅️ Use a barra lateral para inserir um link.")
-
-
-
