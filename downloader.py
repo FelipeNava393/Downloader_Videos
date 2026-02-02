@@ -72,12 +72,12 @@ if download_btn:
         output_path = os.path.join(DOWNLOAD_DIR, "video.mp4")
 
         if quality == "720p":
-            format_opt = "bestvideo[height<=720]+bestaudio/best[height<=720]"
+            format_opt = "best[ext=mp4][height<=720]"
         elif quality == "480p":
-            format_opt = "bestvideo[height<=480]+bestaudio/best[height<=480]"
+            format_opt = "best[ext=mp4][height<=480]"
         else:
-            format_opt = "best"
-
+            format_opt = "best[ext=mp4]"
+            
         try:
             status.write("📡 Baixando vídeo...")
             command = [
@@ -119,5 +119,6 @@ if download_btn:
 
 else:
     st.info("⬅️ Use a barra lateral para inserir um link.")
+
 
 
